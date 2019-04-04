@@ -1,0 +1,2 @@
+# AspNetCore2DemoAppSol
+AspNetCore2DemoAppSol with windows authentication
