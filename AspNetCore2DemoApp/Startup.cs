@@ -122,8 +122,6 @@ namespace AspNetCore2DemoApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
-
             // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
 
@@ -133,6 +131,8 @@ namespace AspNetCore2DemoApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseAuthentication();
 
             // Important: this must be after app.UseMvc
             app.UseCookiePolicy();
