@@ -21,6 +21,7 @@ namespace AspNetCore2DemoApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private string _domain;
         private string _username;
 
         private IConfiguration _configuration;
@@ -36,23 +37,12 @@ namespace AspNetCore2DemoApp.Controllers
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
             var domainUser = _httpContextAccessor.HttpContext.User.Identity.Name;
-            _username = string.Empty;
+
             if (!string.IsNullOrEmpty(domainUser))
-                _username = Regex.Replace(domainUser, ".*\\\\(.*)", "$1", RegexOptions.None);
-
-            var user = WindowsIdentity.GetCurrent();
-
-            _logger.LogInformation($"User: {user.Name} - State: {user.ImpersonationLevel}");
-
-            WindowsIdentity.RunImpersonated(user.AccessToken, () =>
             {
-                var impersonatedUser = WindowsIdentity.GetCurrent();
-                var message =
-                    $"User: {impersonatedUser.Name}\t" +
-                    $"State: {impersonatedUser.ImpersonationLevel}";
-
-                _logger.LogInformation($"Impersonated Info: {message}");
-            });
+                _domain = Regex.Replace(domainUser, "(.*)\\\\.*", "$1", RegexOptions.None);
+                _username = Regex.Replace(domainUser, ".*\\\\(.*)", "$1", RegexOptions.None);
+            }
 
             _configuration = configuration;
         }
