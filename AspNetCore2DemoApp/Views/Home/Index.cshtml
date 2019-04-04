@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="javascript:void(0)" onclick="AppStart.Utils.LoadPageAsync()">Person Form...</a>.</p>
+    <h1>@ViewBag.Username</h1>
+    <h1>@System.Security.Principal.WindowsIdentity.GetCurrent().Name</h1>
+</div>
+<div id="PersonFormDiv">
+</div>
+@await Html.PartialAsync("_personForm")
+
+<div id="divMsg" class="div_msg">
+    <span class="fmtext">Item saved successfully!!!</span>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        AppStart.Utils.ShowMessageTest();
+
+        AppStart.Utils.SaveSucceeded('@ViewBag.Success');
+
+    </script>
+}

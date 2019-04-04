@@ -1,0 +1,47 @@
+﻿@model AspNetCore2DemoApp.ViewModels.PersonVm
+<h4>PersonVm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="SavePersonAsync">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label"></label>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoB" class="control-label"></label>
+                <input asp-for="DoB" class="form-control" />
+                <span asp-validation-for="DoB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HasDeposit" class="control-label"></label>
+                @Html.DropDownList("HasDeposit", new List<SelectListItem>
+                 {
+                     new SelectListItem{ Text="", Value = "" },
+                     new SelectListItem{ Text="No", Value = "1" },
+                     new SelectListItem{ Text="Yes", Value = "2" }
+                 })
+                <span asp-validation-for="HasDeposit" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="DepositDesc" class="control-label"></label>
+                <textarea asp-for="DepositDesc" class="form-control" rows="4" cols="50"></textarea>
+                <span asp-validation-for="DepositDesc" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
