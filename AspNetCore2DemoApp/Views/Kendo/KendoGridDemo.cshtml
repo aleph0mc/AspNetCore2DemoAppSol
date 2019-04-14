@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "KendoGridDemo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>KendoGridDemo</h1>
+@(Html.Kendo().DatePicker()
+              .Name("datepicker")
+              .Value("10/10/2011")
+              .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+)
+<br />
+
+@(Html.Kendo().Grid<PersonVm>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.Name).Width(140);
+                columns.Bound(c => c.Lastname).Width(190);
+                columns.Bound(c => c.DoB);
+            })
+            .HtmlAttributes(new { style = "height: 380px;" })
+            .Scrollable()
+            .Groupable()
+            .Sortable()
+            .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(5))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .ServerOperation(false)
+                .Read(read => read.Action("LoadData", "Kendo"))
+            )
+)
+
+

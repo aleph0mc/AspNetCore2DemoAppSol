@@ -1,4 +1,5 @@
 ﻿/// <reference path="References/jquery/jquery.d.ts"/>
+/// <reference path="References/kendo-ui/kendo-ui.d.ts"/>
 
 module AppStart {
 

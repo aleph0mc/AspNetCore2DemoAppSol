@@ -82,6 +82,9 @@ namespace AspNetCore2DemoApp
                 .AddFluentValidation(fv => fv.ConfigureClientsideValidation(enabled: false)) //Install-Package FluentValidation.AspNetCore
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+            // Add Kendo UI services to the services container
+            services.AddKendo();
+
             // Adds a default in-memory implementation of IDistributedCache
             //services.AddDistributedMemoryCache();
             services.AddMemoryCache();
