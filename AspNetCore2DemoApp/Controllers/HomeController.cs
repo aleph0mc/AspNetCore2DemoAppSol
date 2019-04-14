@@ -13,7 +13,6 @@ using System.Security.Principal;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using SimpleImpersonation;
 
 namespace AspNetCore2DemoApp.Controllers
 {
@@ -54,29 +53,6 @@ namespace AspNetCore2DemoApp.Controllers
 
             _logger.LogInformation("==================================================================");
 
-
-            var credentials = new UserCredentials("domain", "user", "pwd");
-            Impersonation.RunAsUser(credentials, LogonType.Interactive, () =>
-            {
-                string connectionString = _configuration.GetConnectionString("NwinDBConn");
-                _logger.LogInformation($"Connecting to DB via trusted authentication (impersonation): {connectionString}");
-
-                using (var dbConn = new SqlConnection(connectionString))
-                {
-                    _logger.LogInformation($"OPENING CONNECTION TO DB Northwind");
-
-                    try
-                    {
-                        dbConn.Open();
-                        _logger.LogInformation($"CONNECTION OPENED SUCCESSFULLY");
-                    }
-                    catch (Exception ex)
-                    {
-
-                        _logger.LogInformation($"CONNECTION NOT OPENED SUCCESSFULLY . . . ERROR: {ex.Message}");
-                    }
-                }
-            });
 
             _logger.LogInformation("==================================================================");
 
